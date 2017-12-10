@@ -35,6 +35,15 @@ nnoremap <Leader>e :bufdo e<Enter>
 nnoremap <Leader>r :!clear && printf '   ' && date -u && echo '--------------- * ----------------\n' && node %<Enter>
 nnoremap <Leader>subl :!/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ./ && clear<Enter>
 
+"delete instead of cut
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
+
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+let g:ctrlp_use_caching = 0
+
 let g:airline#extensions#tabline#enabled = 1
 
 call plug#begin('~/.vim/plugged')
@@ -50,6 +59,4 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
-
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
