@@ -31,6 +31,7 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
 """""""""""""""""""""""""""""""
 
