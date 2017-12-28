@@ -33,6 +33,9 @@ set shiftwidth=2
 
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
+" confirm save on quit
+set confirm
+
 """""""""""""""""""""""""""""""
 
 :let mapleader = " "
@@ -41,6 +44,12 @@ inoremap jj <ESC>
 inoremap jkj <ESC>
 
 nnoremap ; :
+
+" insert navigation
+inoremap dfj <esc>ja
+inoremap dfh <esc>i
+inoremap dfk <esc>ka
+inoremap dfl <esc>la
 
 " pane view selector
 nnoremap <C-J> <C-W><C-J>
