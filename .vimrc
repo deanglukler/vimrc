@@ -10,6 +10,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'lambdalisue/battery.vim'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 
 call plug#end()
 
@@ -44,6 +46,11 @@ inoremap jj <ESC>
 inoremap jkj <ESC>
 
 nnoremap ; :
+
+" Snippets (UltiSnips)
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<tab>"
 
 " insert navigation
 inoremap dfj <esc>ja
