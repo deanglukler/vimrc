@@ -16,6 +16,12 @@ Plug 'SirVer/ultisnips'
 call plug#end()
 
 " ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+" ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 syntax on
 filetype plugin on
@@ -71,8 +77,8 @@ nnoremap <leader>n/ :e
 nnoremap <leader>ndel :call delete(expand('%'))
 
 " leader q mappings
-nnoremap <leader>qnu :set nu<cr>
-nnoremap <leader>qno :set nonu<cr>
+nnoremap <leader>rnu :set nu<cr>
+nnoremap <leader>rno :set nonu<cr>
 
 " surround plugin
 nmap <leader>ss ysiw
