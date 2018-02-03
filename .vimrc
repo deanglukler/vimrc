@@ -1,3 +1,7 @@
+" vim tips
+" current file: %
+"
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree' "filetree
@@ -44,12 +48,15 @@ hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 " confirm save on quit
 set confirm
 
+" change cursor insert mode vs normal
+:autocmd InsertEnter * set cul
+:autocmd InsertLeave * set nocul
+
 """""""""""""""""""""""""""""""
 
 :let mapleader = " "
 
 inoremap jj <ESC>
-inoremap jkj <ESC>
 
 nnoremap ; :
 
@@ -72,21 +79,7 @@ nnoremap <C-H> <C-W><C-H>
 
 " files
 nnoremap <leader>n. :e %:h/
-nnoremap <leader>nn :e %:h/
 nnoremap <leader>n/ :e 
-nnoremap <leader>ndel :call delete(expand('%'))
-
-" leader q mappings
-nnoremap <leader>rnu :set nu<cr>
-nnoremap <leader>rno :set nonu<cr>
-
-" surround plugin
-nmap <leader>ss ysiw
-nmap <leader>sc cs
-nmap <leader>sd ds
-inoremap jkss <ESC>ysiw
-imap jksc <ESC>cs
-imap jksd <ESC>ds
 
 " autocomplete keyword completion
 inoremap ,. <c-n>
@@ -99,9 +92,9 @@ nnoremap <leader>u <C-r>
 
 " Inserting text
 inoremap kjA <ESC>A
-inoremap kja <ESC>ea
+inoremap kje <ESC>ea
 inoremap kjI <ESC>I
-inoremap kji <ESC>bi
+inoremap kjb <ESC>bi
 
 " Cursor Movement
 nnoremap <Leader>j 15j<C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e>
@@ -109,33 +102,27 @@ vnoremap <Leader>j 15j<C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-
 nnoremap <Leader>k 15k<C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>
 vnoremap <Leader>k 15k<C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>
 
-nnoremap <Leader>l <C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e>
-vnoremap <Leader>l <C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e>
-nnoremap <Leader>; <C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>
-vnoremap <Leader>; <C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>
+nnoremap <Leader>l zt23j
+vnoremap <Leader>l zt23j
+nnoremap <Leader>; zb23k
+vnoremap <Leader>; zb23k
 
-
-" highligh word
-inoremap jkd <ESC>viwd
+" highligtht word
+inoremap jkd <ESC>viw
 inoremap kjd <ESC>ciw
 nnoremap <Leader>d viw
 vnoremap <Leader>d viw
 
 " Highlight Line
-inoremap jki <ESC>^v$h
-inoremap kji <ESC>^v$hc
-nnoremap <Leader>i ^v$h
-vnoremap <Leader>i v^v$h
-
-"quick select
-inoremap kjv <ESC>vi
-"quick chage
-inoremap kjc <ESC>ci
+inoremap jki <esc>^v$h
+inoremap kji <esc>^v$hc
+nnoremap <leader>i ^v$h
+vnoremap <leader>i v^v$h
 
 " Inserting lines
 nnoremap <Leader>o o<ESC>
-inoremap kjo <ESC>o
 nnoremap <Leader>O O<ESC>
+inoremap kjo <ESC>o
 inoremap kjO <ESC>O
 inoremap jkO <ESC>O<ESC>
 inoremap jko <ESC>o<ESC>
@@ -164,12 +151,9 @@ nmap <Leader>/ gcc
 imap jk/ <ESC>gcc
 
 " Indentation
-nnoremap <Leader>= 15==
+nnoremap <Leader>= 20==
 inoremap kj= <ESC>==A
 inoremap jk= <ESC>==
-
-" NERDTREE
-nnoremap <Leader>bb :NERDTreeToggle<Enter>
 
 " Buffers
 nnoremap <Leader>, :bn<Enter>
@@ -179,16 +163,24 @@ nnoremap <Leader><Tab> :e#<CR>
 inoremap jk<Tab> <ESC>:e#<CR>
 nnoremap <Leader>bn :buffers<CR>:buffer<Space>
 
+" NERDTREE
+" Open NerdTree map menu
+" Default key: m
+" Refresh NerdTree map
+" Default key: R
+nnoremap <Leader>bb :NERDTreeToggle<Enter>
+
 "Fuzzy search
 nnoremap <Leader>p :CtrlP<CR>
 
-":e (edit all)
+":e (edit all) which refreshes changed files
 nnoremap <Leader>e :bufdo e<Enter>
 
 " switch to grave register
 nnoremap <leader>' "_
 vnoremap <leader>' "_
 
+"r commands
 "run scripts
 nnoremap <Leader>rn :!rnode %<Enter>
 vnoremap <Leader>rn :!rnode %<Enter>
@@ -196,12 +188,18 @@ nnoremap <Leader>rp :!rpython %<Enter>
 vnoremap <Leader>rp :!rpython %<Enter>
 nnoremap <Leader>rt :!oet %<Enter>
 vnoremap <Leader>rt :!oet %<Enter>
+" set/unset numbers
+nnoremap <leader>rnu :set nu<cr>
+nnoremap <leader>rno :set nonu<cr>
+" eslint
+nnoremap <Leader>re :!eslint % --fix
 
 "open sublime
 nnoremap <Leader>subl :w<Enter>:!/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ./ && clear<Enter>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" control p fuzzy search options
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 let g:ctrlp_use_caching = 0
