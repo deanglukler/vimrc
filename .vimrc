@@ -1,32 +1,3 @@
-" vim tips
-" current file: %
-"
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'scrooloose/nerdtree' "filetree
-Plug 'sheerun/vim-polyglot' "language pack
-Plug 'kien/ctrlp.vim' "fuzzy finder
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
-Plug 'lambdalisue/battery.vim'
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-
-call plug#end()
-
-" ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-" ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
 syntax on
 filetype plugin on
 
@@ -35,13 +6,13 @@ set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
 
-set clipboard=unnamed
-
 set autoindent
 set smartindent
 set expandtab
 set softtabstop=2
 set shiftwidth=2
+
+set clipboard=unnamed
 
 hi MatchParen cterm=bold ctermbg=magenta ctermfg=magenta
 
@@ -59,11 +30,6 @@ set confirm
 inoremap jj <ESC>
 
 nnoremap ; :
-
-" Snippets (UltiSnips)
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<tab>"
 
 " insert navigation
 inoremap dfj <esc>ja
@@ -102,6 +68,7 @@ vnoremap <Leader>j 15j<C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-
 nnoremap <Leader>k 15k<C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>
 vnoremap <Leader>k 15k<C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>
 
+" bring page up or down
 nnoremap <Leader>l zt23j
 vnoremap <Leader>l zt23j
 nnoremap <Leader>; zb23k
@@ -137,18 +104,11 @@ inoremap jkP <ESC>]pa<ESC>
 inoremap jk$ <ESC>$
 
 "Beginning of Line
-inoremap jk0 <ESC>^
-nnoremap <Leader>0 ^
-vnoremap <Leader>0 ^
+inoremap jk^ <ESC>^
 
 "Select all
 nnoremap <Leader>a ggVG
 vnoremap <Leader>a vggVG
-
-"Comments
-vmap <Leader>/ gc
-nmap <Leader>/ gcc
-imap jk/ <ESC>gcc
 
 " Indentation
 nnoremap <Leader>= 20==
@@ -163,16 +123,6 @@ nnoremap <Leader><Tab> :e#<CR>
 inoremap jk<Tab> <ESC>:e#<CR>
 nnoremap <Leader>bn :buffers<CR>:buffer<Space>
 
-" NERDTREE
-" Open NerdTree map menu
-" Default key: m
-" Refresh NerdTree map
-" Default key: R
-nnoremap <Leader>bb :NERDTreeToggle<Enter>
-
-"Fuzzy search
-nnoremap <Leader>p :CtrlP<CR>
-
 ":e (edit all) which refreshes changed files
 nnoremap <Leader>e :bufdo e<Enter>
 
@@ -182,49 +132,19 @@ vnoremap <leader>' "_
 
 "r commands
 "run scripts
-nnoremap <Leader>rn :!rnode %<Enter>
+nnoremap <Leader>rnode :!rnode %<Enter>
 vnoremap <Leader>rn :!rnode %<Enter>
 nnoremap <Leader>rp :!rpython %<Enter>
 vnoremap <Leader>rp :!rpython %<Enter>
 nnoremap <Leader>rt :!oet %<Enter>
 vnoremap <Leader>rt :!oet %<Enter>
 " set/unset numbers
-nnoremap <leader>rnu :set nu<cr>
-nnoremap <leader>rno :set nonu<cr>
+
 " eslint
 nnoremap <Leader>re :!eslint % --fix
 
+" prettier
+autocmd FileType javascript set formatprg=prettier-eslint\ --stdin
+
 "open sublime
 nnoremap <Leader>subl :w<Enter>:!/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ./ && clear<Enter>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" control p fuzzy search options
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-let g:ctrlp_use_caching = 0
-
-let g:airline#extensions#tabline#enabled = 1
-
-" ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-
-set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%#LineNr#
-set statusline+=%{StatuslineGit()}
-set statusline+=\ %f
-set statusline+=%m\
-set statusline+=%=
-set statusline+=\ %y "file type
-set statusline+=\ Buf:%n
-set statusline+=\ %{battery#component()}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
