@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/slimbean'
-let g:netrw_dirhist_2='/Users/slimbean/lighthouse/w5/chatty'
-let g:netrw_dirhist_3='/Users/slimbean/lighthouse/w5/chatty/src'
-let g:netrw_dirhist_4='/Users/slimbean/lighthouse/w5/chatty'
-let g:netrw_dirhist_5='/Users/slimbean/lighthouse/w5/chatty/dist'
-let g:netrw_dirhist_6='/Users/slimbean/lighthouse/w5/chatty'

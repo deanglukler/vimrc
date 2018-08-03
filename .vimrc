@@ -43,7 +43,7 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+hi MatchParen cterm=bold ctermbg=magenta ctermfg=magenta
 
 " confirm save on quit
 set confirm
@@ -128,7 +128,7 @@ inoremap jkO <ESC>O<ESC>
 inoremap jko <ESC>o<ESC>
 
 " paste
-inoremap kjp <ESC>]pi
+inoremap kjp <ESC>]pa
 inoremap kjP <ESC>]pA
 inoremap jkp <ESC>]pa<ESC>
 inoremap jkP <ESC>]pa<ESC>
